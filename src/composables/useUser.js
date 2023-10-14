@@ -1,8 +1,7 @@
-import { collection, getDocs, addDoc } from 'firebase/firestore'
-import { db, storage } from '@/firebase'
-import { getStorage, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { collection, query, where, getDocs, addDoc  } from 'firebase/firestore'
+import { db} from '@/firebase'
 import { ref, computed } from 'vue'
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider,signOut} from 'firebase/auth'
 
 export const useUser = () => {
   const user = ref()
@@ -40,9 +39,15 @@ export const useUser = () => {
 
   async function addUserToMainDatabase() {
     loading.value.user = true
+    const email = userRemake.value.email;
+    const check = await getDocs(query(collection(db, 'users'), where('email', '==', email)));
     try {
-      if (userRemake.value) {
+      if (check.size===0) {
         await addDoc(collection(db, 'users'), userRemake.value)
+        console.log('Пользователь успешно добавлен');
+      }
+      else {
+        console.log('Пользователь с таким email уже зарегистрирован');
       }
       loading.value.user = false
     } catch (error) {
@@ -51,10 +56,17 @@ export const useUser = () => {
   }
 
   function googleLogout() {
-    localStorage.removeItem('user')
-    location.reload()
+    try {
+      signOut(auth).then(() => {
+        user.value = null;
+        console.log("вышли")
+      }).catch(error => {
+        console.error(error);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
-
   return {
     user,
     loading,

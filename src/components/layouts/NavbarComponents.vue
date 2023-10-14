@@ -1,19 +1,64 @@
-
-
 <template>
-  
- <div class="side"> 
-<p-button v-if="!user" @click="googleRegister" label="Войти" icon="pi pi-sign-in"/> 
-<p-button v-if="!user" @click="googleLogout" label="Выйти" icon="pi-sign-out"/> 
- </div>
+    <div class="card relative z-2">
+        <Menubar :model="items">
+            <template #item="{ label, item, props, root, hasSubmenu }">
+                <router-link v-if="item.route" v-slot="routerProps" :to="item.route" custom>
+                    <a :href="routerProps.href" v-bind="props.action">
+                        <span v-bind="props.icon" />
+                        <span v-bind="props.label">{{ label }}</span>
+                    </a>
+                </router-link>
+                <a v-else :href="item.url" :target="item.target" v-bind="props.action">
+                    <span v-bind="props.icon" />
+                    <span v-bind="props.label">{{ label }}</span>
+                    <span :class="[hasSubmenu && (root ? 'pi pi-fw pi-angle-down' : 'pi pi-fw pi-angle-right')]" v-bind="props.submenuicon" />
+                </a>
+            </template>
+            <template #end>
+              <ModalForHob/>
+              </template>
+        </Menubar>
+</div>
 
 </template>
 
 <script setup>
-import PButton from 'primevue/button'
 import {useUser} from '@/composables/useUser'
+import Menubar from 'primevue/menubar';
+import { ref } from "vue";
+import ModalForHob from "@/components/ModalForHob.vue"
+
 
 const {user,googleRegister,googleLogout} =useUser()
+
+const items = ref([
+    {
+        label: 'home',
+        icon: 'pi pi-eject',
+        route: '/'
+    },
+    {
+        label: 'Users',
+        icon: 'pi pi-fw pi-user',
+        items: [
+            {
+                label: 'Зайти',
+                icon: 'pi pi-fw pi-user-plus',
+                command: () => {googleRegister()
+        }
+            },
+            {
+                label: 'Выйти',
+                icon: 'pi-sign-out',
+                command: () => {googleLogout()
+        }
+            },
+            
+        ]
+    },
+]);
+
+
 
 
 </script>
