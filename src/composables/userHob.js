@@ -1,9 +1,11 @@
 import { collection, getDocs, addDoc } from 'firebase/firestore'
 import { db } from '@/firebase'
 import { getStorage, uploadBytes} from 'firebase/storage'
-import { ref,computed } from 'vue'
+import { ref,computed} from 'vue'
 import {createId} from '@/services/methods'
 import * as firebase from 'firebase/storage'
+import { useUser } from '@/composables/useUser';
+
 
 export const userHob = () => {
 
@@ -12,7 +14,7 @@ export const userHob = () => {
     name: '',
     hobbie: '',
     adres: '',
-    mail: '',
+    autor: '',
     city: '',
     image: null,
   })
@@ -28,23 +30,27 @@ export const userHob = () => {
 
 const HubListRemake=computed(()=>{
   const _HubListRemake=HubList.value.map((Hub)=>{
-    Hub.mail=`${Hub.mail}gmail.com`
+    Hub.city=`${Hub.city}г.`
     return Hub
   })
   return _HubListRemake || []
 })
 
   async function createHub() {
-    loading.value.newHub = true;
-
+    const {userRemake}=useUser();
     try {
+      loading.value.newHub = true;
+      newHub.value.autor=userRemake.value
       await addDoc(collection(db, 'hobbies'), newHub.value).then(async () => {
-       await getHubList()
+      await getHubList()
       })
     } catch (e) {
-      console.error('Error: ', e)
+      console.error(e)
     }
   }
+
+
+
 
   async function getHubList() {
     loading.value.HubList = true
@@ -59,7 +65,6 @@ const HubListRemake=computed(()=>{
       loading.value.HubList = false
     }
   }
-
 
   async function getHub(id){
     loading.value.Hub=true
@@ -110,7 +115,7 @@ const HubListRemake=computed(()=>{
       name: '',
       hobbie: '',
       adres: '',
-      mail: '',
+      autor: '',
       city: '',
       image: null,
     }

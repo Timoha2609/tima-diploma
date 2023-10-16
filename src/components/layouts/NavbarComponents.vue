@@ -29,7 +29,7 @@ import { ref } from "vue";
 import ModalForHob from "@/components/ModalForHob.vue"
 
 
-const {user,googleRegister,googleLogout} =useUser()
+const {googleRegister,googleLogout} =useUser()
 
 const items = ref([
     {

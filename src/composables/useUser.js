@@ -1,14 +1,17 @@
-import { collection, query, where, getDocs, addDoc  } from 'firebase/firestore'
+import { collection, getDocs, addDoc} from 'firebase/firestore'
 import { db} from '@/firebase'
-import { ref, computed } from 'vue'
-import { getAuth, signInWithPopup, GoogleAuthProvider,signOut} from 'firebase/auth'
+import { ref, computed} from 'vue'
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+
+const user = ref()
+const userList = ref([])
+
+const loading = ref({
+  user: false,
+  userList: false
+})
 
 export const useUser = () => {
-  const user = ref()
-
-  const loading = ref({
-    user: false
-  })
 
   const auth = getAuth()
 
@@ -39,15 +42,14 @@ export const useUser = () => {
 
   async function addUserToMainDatabase() {
     loading.value.user = true
-    const email = userRemake.value.email;
-    const check = await getDocs(query(collection(db, 'users'), where('email', '==', email)));
     try {
-      if (check.size===0) {
-        await addDoc(collection(db, 'users'), userRemake.value)
-        console.log('Пользователь успешно добавлен');
-      }
-      else {
-        console.log('Пользователь с таким email уже зарегистрирован');
+      if (userRemake.value) {
+        await getAllUsers()
+        if (!checkUserInDatabase()) {
+          await addDoc(collection(db, 'users'), userRemake.value)
+        } else {
+          console.error('User already in database')
+        }
       }
       loading.value.user = false
     } catch (error) {
@@ -55,22 +57,38 @@ export const useUser = () => {
     }
   }
 
-  function googleLogout() {
+  async function getAllUsers() {
+    loading.value.userList = true
     try {
-      signOut(auth).then(() => {
-        user.value = null;
-        console.log("вышли")
-      }).catch(error => {
-        console.error(error);
-      });
+      const querySnapshot = await getDocs(collection(db, 'users'))
+      querySnapshot.forEach((doc) => {
+        userList.value.push(doc.data())
+      })
+      loading.value.userList = false
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
+
+  function checkUserInDatabase() {
+    return userList.value.some((item) => item.uid === userRemake.value?.uid)
+  }
+
+  function googleLogout() {
+    auth.signOut()
+    user.value = null
+  }
+
+  
+ 
+
   return {
     user,
     loading,
     googleRegister,
-    googleLogout
+    googleLogout,
+    userRemake,
+    getAllUsers,
+    userList
   }
 }

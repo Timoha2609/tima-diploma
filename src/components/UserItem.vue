@@ -10,6 +10,7 @@ defineProps({
  
 });
 
+
 </script>
 
 <template>
@@ -21,9 +22,11 @@ defineProps({
     <template #title> {{ hub.name }}</template>
     
     <template #content>    
-    <p>Email: {{ hub.price }}</p>
-    <p>hobbie: {{ hub.hobbie }}</p>
-    <p>adres {{ hub.adres}}</p>
+    <p>Email: {{ hub.mail }}</p>
+    <p>Hobbie: {{ hub.hobbie }}</p>
+    <p>Adres {{ hub.adres}}</p>
+    <p>City {{ hub.city}}</p>
+    <p>Данные о autor {{ hub.autor}}</p>
     </template>
 </card>
 </div>

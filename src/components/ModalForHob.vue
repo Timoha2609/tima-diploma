@@ -13,10 +13,6 @@
                 <Dropdown id="hobbie" v-model="newHub.hobbie" editable :options="HubLabel" option-label="hobbie" option-value="hobbie" placeholder="Хобби" />
               </div>
               <div class="p-field">
-                <label for="mail">Mail</label>
-                <InputText type="text" v-model="newHub.mail" />
-              </div>
-              <div class="p-field">
                 <label for="adres">Адрес</label>
                 <InputText type="text" v-model="newHub.adres" />
               </div>
@@ -50,10 +46,10 @@ import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
-import { userHob } from '@/composableshob/userHob';
+import { userHob } from '@/composables/userHob';
 
 
-const{newHub,createHub,loading,clear,uploadImage}=userHob()
+const{newHub,createHub,clear,uploadImage}=userHob()
 
 const visible = ref(false);
 
