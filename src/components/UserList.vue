@@ -58,9 +58,11 @@ onMounted(async () => {
 
 <template> 
 
-  <section class="cars">
+  <section class="hob">
     <button @click="pred">Предыдущий</button>
-    <UserItem :hub="currentHub" v-if="currentHub" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd"  />
+    <div class="card-container" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+      <UserItem :hub="currentHub" v-if="currentHub" />
+    </div>
     <button @click="next">Next</button>
 
   </section>
@@ -71,6 +73,14 @@ onMounted(async () => {
 </template>
 
 <style scoped> 
+.hob{
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+}
 
-
+.card-container {
+  display: flex;
+  justify-content: center; 
+}
 </style>
