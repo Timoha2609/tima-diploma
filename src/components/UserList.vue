@@ -4,11 +4,9 @@ import { onMounted } from "vue";
 import { userHob } from '@/composables/userHob';
 import { ref, computed } from 'vue';
 
-
-
 const { HubListRemake, getHubList } = userHob();
-
 const currentIndex = ref(0);
+const currentTouchStartX = ref(null);
 
 const currentHub = computed(() => {
   if (HubListRemake.value && HubListRemake.value.length > 0) {
@@ -30,6 +28,25 @@ const next = () => {
   }
 };
 
+const onTouchStart = (event) => {
+  currentTouchStartX.value = event.touches[0].clientX;
+};
+
+const onTouchMove = (event) => {
+  if (currentTouchStartX.value !== null) {
+    const deltaX = event.touches[0].clientX - currentTouchStartX.value;
+    if (deltaX > 50) { 
+      pred();
+    } else if (deltaX < -50) { 
+      next();
+    }
+  }
+};
+
+const onTouchEnd = () => {
+  currentTouchStartX.value = null;
+};
+
 
 
 onMounted(async () => {
@@ -42,11 +59,10 @@ onMounted(async () => {
 <template> 
 
   <section class="cars">
-    <div v-touch:swipe.left="next" v-touch:swipe.right="pred">
     <button @click="pred">Предыдущий</button>
-    <UserItem :hub="currentHub" v-if="currentHub" />
+    <UserItem :hub="currentHub" v-if="currentHub" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd"  />
     <button @click="next">Next</button>
-    </div>
+
   </section>
 
 
