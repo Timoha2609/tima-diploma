@@ -4,6 +4,8 @@ import { onMounted } from "vue";
 import { userHob } from '@/composables/userHob';
 import { ref, computed } from 'vue';
 
+
+
 const { HubListRemake, getHubList } = userHob();
 
 const currentIndex = ref(0);
@@ -28,31 +30,11 @@ const next = () => {
   }
 };
 
-let touchstartX = 0;
-let touchendX = 0;
-const slider = document.querySelector(".cars");
 
-slider.addEventListener("touchstart", (e) => {
-  touchstartX = e.changedTouches[0].screenX;
-});
-
-slider.addEventListener("touchend", (e) => {
-  touchendX = e.changedTouches[0].screenX;
-  handleSwipe();
-});
-
-function handleSwipe() {
-  if (touchendX < touchstartX) {
-    next(); 
-  }
-
-  if (touchendX > touchstartX) {
-    pred(); 
-  }
-}
 
 onMounted(async () => {
   await getHubList();
+
 });
 
 </script>
@@ -60,9 +42,11 @@ onMounted(async () => {
 <template> 
 
   <section class="cars">
+    <div v-touch:swipe.left="next" v-touch:swipe.right="pred">
     <button @click="pred">Предыдущий</button>
     <UserItem :hub="currentHub" v-if="currentHub" />
     <button @click="next">Next</button>
+    </div>
   </section>
 
 

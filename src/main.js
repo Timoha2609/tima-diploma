@@ -11,6 +11,8 @@ import 'primevue/resources/themes/lara-dark-indigo/theme.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'  
 
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyC0Lxu9uQZkRovxhw5MLRuGXGgkiN7xDu8",
     authDomain: "diplomatima-2ecca.firebaseapp.com",
