@@ -16,18 +16,19 @@ const currentHub = computed(() => {
   }
 });
 
-const pred = () => {
-  if (currentIndex.value > 0) {
-    currentIndex.value--;
-  }
-};
 
-const next = () => {
+
+const like = () => {
   if (currentIndex.value < (HubListRemake.value.length - 1)) {
     currentIndex.value++;
   }
 };
 
+const diz = () => {
+  if (currentIndex.value < (HubListRemake.value.length - 1)) {
+    currentIndex.value++;
+  }
+};
 
 
 onMounted(async () => {
@@ -40,11 +41,11 @@ onMounted(async () => {
 <template> 
 
   <section class="hob">
-    <button @click="pred">Предыдущий</button>
+    <button @click="diz">Дизлайк</button>
     <div class="card-container">
       <UserItem :hub="currentHub" v-if="currentHub" />
     </div>
-    <button @click="next">Next</button>
+    <button @click="like">Лайк</button>
 
   </section>
 
