@@ -6,7 +6,7 @@ import { ref, computed } from 'vue';
 
 const { HubListRemake, getHubList } = userHob();
 const currentIndex = ref(0);
-const currentTouchStartX = ref(null);
+
 
 const currentHub = computed(() => {
   if (HubListRemake.value && HubListRemake.value.length > 0) {
@@ -28,25 +28,6 @@ const next = () => {
   }
 };
 
-const onTouchStart = (event) => {
-  currentTouchStartX.value = event.touches[0].clientX;
-};
-
-const onTouchMove = (event) => {
-  if (currentTouchStartX.value !== null) {
-    const deltaX = event.touches[0].clientX - currentTouchStartX.value;
-    if (deltaX > 50) { 
-      pred();
-    } else if (deltaX < -50) { 
-      next();
-    }
-  }
-};
-
-const onTouchEnd = () => {
-  currentTouchStartX.value = null;
-};
-
 
 
 onMounted(async () => {
@@ -60,7 +41,7 @@ onMounted(async () => {
 
   <section class="hob">
     <button @click="pred">Предыдущий</button>
-    <div class="card-container" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+    <div class="card-container">
       <UserItem :hub="currentHub" v-if="currentHub" />
     </div>
     <button @click="next">Next</button>

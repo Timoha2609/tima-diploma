@@ -41,6 +41,7 @@ defineProps({
 .hub-image {
   max-width: 190px; 
   width: 100%; 
+  height: 100px;
   margin: 0 auto;
   display: block;
 }
