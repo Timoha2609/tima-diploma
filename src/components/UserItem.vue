@@ -29,6 +29,7 @@ defineProps({
     <p class="card-paragraph">Adres {{ hub.adres}}</p>
     <p class="card-paragraph">City {{ hub.city}}</p>
     </template>
+    
 </card>
 </div>
 </template>

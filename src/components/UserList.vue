@@ -3,9 +3,14 @@ import UserItem from "@/components/UserItem.vue";
 import { onMounted } from "vue";
 import { userHob } from '@/composables/userHob';
 import { ref, computed } from 'vue';
+import Button from 'primevue/button';
+import Swiper from 'swiper/bundle';
+import {useUser} from ///
 
 const { HubListRemake, getHubList } = userHob();
 const currentIndex = ref(0);
+
+const {user} = useUser()
 
 
 const currentHub = computed(() => {
@@ -21,12 +26,21 @@ const currentHub = computed(() => {
 const like = () => {
   if (currentIndex.value < (HubListRemake.value.length - 1)) {
     currentIndex.value++;
+    console.log(HubListRemake.value[currentIndex.value-1].id)
+    user.value.favourites.push(///)
+
+  }
+  else{
+    currentIndex.value=0
   }
 };
 
 const diz = () => {
   if (currentIndex.value < (HubListRemake.value.length - 1)) {
     currentIndex.value++;
+  }
+  else{
+    currentIndex.value=0
   }
 };
 
@@ -36,18 +50,34 @@ onMounted(async () => {
 
 });
 
+const swiper = new Swiper('.swiper-container', {
+    slidesPerView: 1, 
+    spaceBetween: 10,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+
+  swiper.on('slideChange', () => {
+    currentIndex.value = swiper.activeIndex; // Обновление currentIndex при перелистывании
+  });
+
+
+
+
 </script>
 
 <template> 
 
   <section class="hob">
-    <button @click="diz">Дизлайк</button>
+    <Button label="Дизлайк" @click="diz" severity="danger" raised />
     <div class="card-container">
       <UserItem :hub="currentHub" v-if="currentHub" />
     </div>
-    <button @click="like">Лайк</button>
-
+    <Button @click="like" label="Лайк" severity="success" raised />
   </section>
+
 
 
 

@@ -1,5 +1,5 @@
 <template> 
-    <Button label="Show" icon="pi pi-external-link" @click="toogleVisible" true />
+    <Button label="Расскажи о себе" icon="pi pi-external-link" @click="toogleVisible" true />
 
     <Dialog v-model:visible="visible" modal header="Расскажи о себе" :style="{ width: '50vw' }">
         <template #default>

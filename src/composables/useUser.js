@@ -1,6 +1,6 @@
 import { collection, getDocs, addDoc} from 'firebase/firestore'
-import { db} from '@/firebase'
-import { ref, computed} from 'vue'
+import {db} from '@/firebase'
+import { ref, computed, watch } from 'vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 
 const user = ref()
@@ -11,21 +11,18 @@ const loading = ref({
   userList: false
 })
 
-export const useUser = () => {
-
-  const auth = getAuth()
-
-  const userRemake = computed(() => {
-    if (user.value) {
-      return {
-        displayName: user.value.displayName,
-        email: user.value.email,
-        photoURL: user.value.photoURL,
-        uid: user.value.uid
-      }
+const userRemake = computed(() => {
+  if (user.value) {
+    return {
+      uid: user.value.uid,
+      favourites: []
     }
-    return null
-  })
+  }
+  return null
+})
+
+export const useUser = () => {
+  const auth = getAuth()
 
   function googleRegister() {
     const provider = new GoogleAuthProvider()
@@ -34,6 +31,7 @@ export const useUser = () => {
       .then(async (userCredential) => {
         user.value = userCredential.user
         await addUserToMainDatabase()
+        getFromMainDatabase()
       })
       .catch((error) => {
         console.error(error)
@@ -74,21 +72,37 @@ export const useUser = () => {
     return userList.value.some((item) => item.uid === userRemake.value?.uid)
   }
 
+  async function getFromMainDatabase() {
+    await getAllUsers()
+    user.value = userList.value.find((item) => item.uid === userRemake.value?.uid)
+  }
+
+async function updateUserInDatabase() {
+    db.collection('users')
+      .doc(user.value.uid)
+      .update({
+        ...user.value
+      })
+  }
+
   function googleLogout() {
     auth.signOut()
     user.value = null
   }
 
-  
- 
+  watch(user.value, async (newValue) => {
+    if (newValue) {
+      await updateUserInDatabase()
+    }
+  })
 
   return {
     user,
     loading,
     googleRegister,
     googleLogout,
-    userRemake,
     getAllUsers,
+    userRemake,
     userList
   }
 }

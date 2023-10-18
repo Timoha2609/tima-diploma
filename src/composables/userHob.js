@@ -16,6 +16,7 @@ export const userHob = () => {
     adres: '',
     autor: '',
     city: '',
+    favorites:[],
     image: null,
   })
 
@@ -30,7 +31,7 @@ export const userHob = () => {
 
 const HubListRemake=computed(()=>{
   const _HubListRemake=HubList.value.map((Hub)=>{
-    Hub.city=`${Hub.city}г.`
+    Hub.city=`${Hub.city} г.`
     return Hub
   })
   return _HubListRemake || []
@@ -117,6 +118,7 @@ const HubListRemake=computed(()=>{
       adres: '',
       autor: '',
       city: '',
+      favorites:[],
       image: null,
     }
     HubList.value = []
