@@ -5,12 +5,12 @@ import { userHob } from '@/composables/userHob';
 import { ref, computed } from 'vue';
 import Button from 'primevue/button';
 import Swiper from 'swiper/bundle';
-import {useUser} from ///
+// import {useUser} from ///
 
 const { HubListRemake, getHubList } = userHob();
 const currentIndex = ref(0);
 
-const {user} = useUser()
+// const {user} = useUser()
 
 
 const currentHub = computed(() => {
@@ -27,7 +27,7 @@ const like = () => {
   if (currentIndex.value < (HubListRemake.value.length - 1)) {
     currentIndex.value++;
     console.log(HubListRemake.value[currentIndex.value-1].id)
-    user.value.favourites.push(///)
+    // user.value.favourites.push(///)
 
   }
   else{
