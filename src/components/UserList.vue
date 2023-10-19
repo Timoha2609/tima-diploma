@@ -4,13 +4,13 @@ import { onMounted } from "vue";
 import { userHob } from '@/composables/userHob';
 import { ref, computed } from 'vue';
 import Button from 'primevue/button';
-import Swiper from 'swiper/bundle';
-// import {useUser} from ///
+// import Swiper from 'swiper/bundle';
+import { useUser } from '@/composables/useUser';
 
 const { HubListRemake, getHubList } = userHob();
 const currentIndex = ref(0);
 
-// const {user} = useUser()
+const { addToFavorites } = useUser() 
 
 
 const currentHub = computed(() => {
@@ -26,8 +26,11 @@ const currentHub = computed(() => {
 const like = () => {
   if (currentIndex.value < (HubListRemake.value.length - 1)) {
     currentIndex.value++;
-    console.log(HubListRemake.value[currentIndex.value-1].id)
-    // user.value.favourites.push(///)
+    const favoriteid=HubListRemake.value[currentIndex.value-1].id
+    console.log(favoriteid)
+    if (favoriteid) {
+      addToFavorites(favoriteid); 
+    }
 
   }
   else{
@@ -50,18 +53,18 @@ onMounted(async () => {
 
 });
 
-const swiper = new Swiper('.swiper-container', {
-    slidesPerView: 1, 
-    spaceBetween: 10,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  });
+// const swiper = new Swiper('.swiper-container', {
+//     slidesPerView: 1, 
+//     spaceBetween: 10,
+//     navigation: {
+//       nextEl: '.swiper-button-next',
+//       prevEl: '.swiper-button-prev',
+//     },
+//   });
 
-  swiper.on('slideChange', () => {
-    currentIndex.value = swiper.activeIndex; // Обновление currentIndex при перелистывании
-  });
+//   swiper.on('slideChange', () => {
+//     currentIndex.value = swiper.activeIndex; // Обновление currentIndex при перелистывании
+//   });
 
 
 

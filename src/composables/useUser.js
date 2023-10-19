@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc} from 'firebase/firestore'
+import { collection, getDocs, addDoc,doc,getDoc,setDoc,updateDoc} from 'firebase/firestore'
 import {db} from '@/firebase'
 import { ref, computed, watch } from 'vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
@@ -15,7 +15,7 @@ const userRemake = computed(() => {
   if (user.value) {
     return {
       uid: user.value.uid,
-      favourites: []
+      favorites:user.value.favorites ? user.value.favorites : [],   
     }
   }
   return null
@@ -77,12 +77,23 @@ export const useUser = () => {
     user.value = userList.value.find((item) => item.uid === userRemake.value?.uid)
   }
 
-async function updateUserInDatabase() {
-    db.collection('users')
-      .doc(user.value.uid)
-      .update({
-        ...user.value
-      })
+  async function updateUserInDatabase() {
+    if (user.value) {
+      try {
+        const userDocRef = doc(db, 'users', user.value.uid);
+        const existingUserDoc = await getDoc(userDocRef);
+        if (existingUserDoc.exists()) {
+          const userData = existingUserDoc.data();
+          const updatedData = {
+            ...userData,
+            ...userRemake.value, 
+          };
+          await setDoc(userDocRef, updatedData);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 
   function googleLogout() {
@@ -90,16 +101,42 @@ async function updateUserInDatabase() {
     user.value = null
   }
 
-  watch(user.value, async (newValue) => {
+  watch(() => user.value, async (newValue) => {
     if (newValue) {
-      await updateUserInDatabase()
+      await updateUserInDatabase();
     }
-  })
+  });
+
+  async function addToFavorites(favoriteId) {
+    console.log('Adding favoriteId:', favoriteId);
+    if (userRemake.value && favoriteId) {
+      try {
+        const userDocRef = doc(db, 'users', user.value.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+        console.log('User data from Firestore:', userDocSnapshot.data());
+  
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
+          console.log('Current favorites:', userData.favorites);
+          let favorites = userData.favorites || [];
+          if (!favorites.includes(favoriteId)) {
+            favorites.push(favoriteId);
+            console.log('Updated favorites:', favorites);
+            await updateDoc(userDocRef, { favorites: favorites });
+            console.log('Favorites updated successfully.');
+          }
+        }
+      } catch (error) {
+        console.error('Error while adding to favorites:', error);
+      }
+    }
+  }
 
   return {
     user,
     loading,
     googleRegister,
+    addToFavorites,
     googleLogout,
     getAllUsers,
     userRemake,
