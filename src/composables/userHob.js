@@ -42,6 +42,7 @@ const HubListRemake=computed(()=>{
     try {
       loading.value.newHub = true;
       newHub.value.autor=userRemake.value
+      console.log(newHub.value.autor)
       await addDoc(collection(db, 'hobbies'), newHub.value).then(async () => {
       await getHubList()
       })

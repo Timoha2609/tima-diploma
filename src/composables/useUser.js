@@ -15,6 +15,7 @@ const userRemake = computed(() => {
   if (user.value) {
     return {
       uid: user.value.uid,
+      email: user.value.email,
       favorites:user.value.favorites ? user.value.favorites : [],   
     }
   }
@@ -24,14 +25,22 @@ const userRemake = computed(() => {
 export const useUser = () => {
   const auth = getAuth()
 
+  // войти с помощью окна гугл
   function googleRegister() {
     const provider = new GoogleAuthProvider()
 
     signInWithPopup(auth, provider)
       .then(async (userCredential) => {
         user.value = userCredential.user
+
+        // проверка первый ли раз он зашел
         await addUserToMainDatabase()
-        getFromMainDatabase()
+
+        // достаем данные если не первый раз
+        await getFromMainDatabase()
+
+        // добавляем в локал сторадж
+        addToLocalStorage()
       })
       .catch((error) => {
         console.error(error)
@@ -89,11 +98,14 @@ export const useUser = () => {
             ...userRemake.value, 
           };
           await setDoc(userDocRef, updatedData);
+          await addToLocalStorage()
+     
         }
       } catch (error) {
         console.error(error);
       }
     }
+    
   }
 
   function googleLogout() {
@@ -112,7 +124,9 @@ export const useUser = () => {
     if (userRemake.value && favoriteId) {
       try {
         const userDocRef = doc(db, 'users', user.value.uid);
+        console.log(userDocRef)
         const userDocSnapshot = await getDoc(userDocRef);
+        console.log(userDocSnapshot.data())
         console.log('User data from Firestore:', userDocSnapshot.data());
   
         if (userDocSnapshot.exists()) {
@@ -131,6 +145,24 @@ export const useUser = () => {
       }
     }
   }
+  
+
+ async function addToLocalStorage() {
+    if (user.value) {
+      localStorage.setItem('user', JSON.stringify(user.value))
+    }
+  }
+
+function getUserFromLocalStorage() {
+    const userFromLocalStorage = localStorage.getItem('user')
+    if (userFromLocalStorage) {
+      user.value = JSON.parse(userFromLocalStorage)
+    }
+  }
+
+  function removeFromLocalStorage() {
+    localStorage.removeItem('user')
+  }
 
   return {
     user,
@@ -140,6 +172,9 @@ export const useUser = () => {
     googleLogout,
     getAllUsers,
     userRemake,
+    addToLocalStorage,
+    getUserFromLocalStorage,
+    removeFromLocalStorage,
     userList
   }
 }

@@ -83,6 +83,10 @@ const HubLabel = [
   { hobbie: 'Настольные игры' },
   { hobbie: 'Танцы' },
   { hobbie: 'IT' },
+  { hobbie: 'Догонялки' },
+  { hobbie: 'Комиксы' },
+  { hobbie: 'Книги' },
+  { hobbie: 'Просто ищу друзей' },
 ]
 
 const kazakhcity=[

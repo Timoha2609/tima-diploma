@@ -13,7 +13,7 @@ const router=useRouter();
 const { HubListRemake, getHubList } = userHob();
 const currentIndex = ref(0);
 
-const { addToFavorites } = useUser() 
+const { addToFavorites} = useUser() 
 
 
 const currentHub = computed(() => {
