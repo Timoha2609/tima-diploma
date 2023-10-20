@@ -81,6 +81,7 @@ const HubLabel = [
   { hobbie: 'Шахматы' },
   { hobbie: 'Везания' },
   { hobbie: 'Настольные игры' },
+  { hobbie: 'Танцы' },
   { hobbie: 'IT' },
 ]
 

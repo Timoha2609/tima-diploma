@@ -2,10 +2,13 @@
 import UserItem from "@/components/UserItem.vue";
 import { onMounted } from "vue";
 import { userHob } from '@/composables/userHob';
+import {useRouter} from 'vue-router'
 import { ref, computed } from 'vue';
 import Button from 'primevue/button';
 // import Swiper from 'swiper/bundle';
 import { useUser } from '@/composables/useUser';
+const router=useRouter();
+
 
 const { HubListRemake, getHubList } = userHob();
 const currentIndex = ref(0);
@@ -53,21 +56,9 @@ onMounted(async () => {
 
 });
 
-// const swiper = new Swiper('.swiper-container', {
-//     slidesPerView: 1, 
-//     spaceBetween: 10,
-//     navigation: {
-//       nextEl: '.swiper-button-next',
-//       prevEl: '.swiper-button-prev',
-//     },
-//   });
-
-//   swiper.on('slideChange', () => {
-//     currentIndex.value = swiper.activeIndex; // Обновление currentIndex при перелистывании
-//   });
-
-
-
+function goToUserListl(){
+  router.push(`/user`)
+}
 
 </script>
 
@@ -82,7 +73,7 @@ onMounted(async () => {
   </section>
 
 
-
+  <Button @click="goToUserListl" label="Мой выбор" severity="success" raised />
 
 
 </template>
