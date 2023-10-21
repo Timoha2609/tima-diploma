@@ -5,7 +5,7 @@ import { userHob } from '@/composables/userHob';
 import {useRouter} from 'vue-router'
 import { ref, computed } from 'vue';
 import Button from 'primevue/button';
-// import Swiper from 'swiper/bundle';
+
 import { useUser } from '@/composables/useUser';
 const router=useRouter();
 

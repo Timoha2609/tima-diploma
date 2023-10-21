@@ -144,6 +144,7 @@ export const useUser = () => {
   function googleLogout() {
     auth.signOut()
     user.value = null
+    removeFromLocalStorage()
   }
 
   watch(() => user.value, async (newValue) => {
