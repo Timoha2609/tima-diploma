@@ -211,6 +211,23 @@ function getUserFromLocalStorage() {
     localStorage.removeItem('user')
   }
 
+  async function removeFromFavorites(favoriteId) {
+    if (userRemake.value && userRemake.value.favorites) {
+      const index = userRemake.value.favorites.indexOf(favoriteId);
+      if (index !== -1) {
+        userRemake.value.favorites.splice(index, 1);
+        try {
+          const userDocRef = doc(db, 'users', userRemake.value.uid);
+          await updateDoc(userDocRef, { favorites: userRemake.value.favorites });
+          await addToLocalStorage();
+        } catch (error) {
+          console.error('Error while removing from favorites:', error);
+        }
+      }
+    }
+  }
+
+
   return {
     user,
     loading,
@@ -219,6 +236,7 @@ function getUserFromLocalStorage() {
     googleLogout,
     getAllUsers,
     userRemake,
+    removeFromFavorites,
     addToLocalStorage,
     getUserFromLocalStorage,
     removeFromLocalStorage,
