@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc,doc,getDoc,setDoc,updateDoc} from 'firebase/firestore'
+import { collection, getDocs,doc,getDoc,setDoc,updateDoc} from 'firebase/firestore'
 import {db} from '@/firebase'
 import { ref, computed, watch } from 'vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
@@ -48,19 +48,52 @@ export const useUser = () => {
   }
 
   async function addUserToMainDatabase() {
-    loading.value.user = true
+    loading.value.user = true;
     try {
       if (userRemake.value) {
-        await getAllUsers()
-        if (!checkUserInDatabase()) {
-          await addDoc(collection(db, 'users'), userRemake.value)
+        const docRef = doc(db, 'users', userRemake.value.uid);
+        const docSnap = await getDoc(docRef);
+        if (!docSnap.exists()) {
+          await setDoc(docRef, userRemake.value);
         } else {
-          console.error('User already in database')
+          console.error('User already in database');
         }
+        if (userRemake.value.favorites) {
+          await updateFavorites(userRemake.value.favorites);
+        }
+        loading.value.user = false;
+      } 
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+  
+  async function updateFavorites(favorites) {
+    if (userRemake.value && userRemake.value.uid && favorites) {
+      try {
+        const userDocRef = doc(db, 'users', userRemake.value.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+        
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
+          let userFavorites = userData.favorites || [];
+          
+          for (const favoriteId of favorites) {
+            if (!userFavorites.includes(favoriteId)) {
+              userFavorites.push(favoriteId);
+            }
+          }
+          
+          await updateDoc(userDocRef, { favorites: userFavorites });
+          
+          // Обновляем локальное хранилие и пользовательский объект
+          user.value.favorites = userFavorites;
+          await addToLocalStorage();
+        }
+      } catch (error) {
+        console.error('Error while adding to favorites:', error);
       }
-      loading.value.user = false
-    } catch (error) {
-      console.error(error)
     }
   }
 
@@ -77,9 +110,9 @@ export const useUser = () => {
     }
   }
 
-  function checkUserInDatabase() {
-    return userList.value.some((item) => item.uid === userRemake.value?.uid)
-  }
+  // function checkUserInDatabase() {
+  //   return userList.value.some((item) => item.uid === userRemake.value?.uid)
+  // }
 
   async function getFromMainDatabase() {
     await getAllUsers()
@@ -121,37 +154,44 @@ export const useUser = () => {
 
   async function addToFavorites(favoriteId) {
     console.log('Adding favoriteId:', favoriteId);
-    if (userRemake.value && favoriteId) {
+    if (userRemake.value && userRemake.value.uid && favoriteId) {
       try {
-        const userDocRef = doc(db, 'users', user.value.uid);
-        console.log(userDocRef)
+        console.log(userRemake.value.uid)
+        const userDocRef = doc(db, 'users', userRemake.value.uid);
+        console.log(userDocRef);
         const userDocSnapshot = await getDoc(userDocRef);
-        console.log(userDocSnapshot.data())
+        console.log(userDocSnapshot.data());
         console.log('User data from Firestore:', userDocSnapshot.data());
-  
+        
         if (userDocSnapshot.exists()) {
-          const userData = userDocSnapshot.data();
+          const userData = userDocSnapshot.data();  
           console.log('Current favorites:', userData.favorites);
-          let favorites = userData.favorites || [];
+          let favorites = userData.favorites || []; 
           if (!favorites.includes(favoriteId)) {
             favorites.push(favoriteId);
             console.log('Updated favorites:', favorites);
             await updateDoc(userDocRef, { favorites: favorites });
             console.log('Favorites updated successfully.');
+  
+            user.value.favorites = favorites;
+            await addToLocalStorage();
           }
         }
       } catch (error) {
         console.error('Error while adding to favorites:', error);
       }
     }
-  }
-  
+  }  
 
- async function addToLocalStorage() {
+async function addToLocalStorage() {
     if (user.value) {
       localStorage.setItem('user', JSON.stringify(user.value))
     }
   }
+
+  watch(() => user.value, () => {
+    addToLocalStorage(); 
+  });
 
 function getUserFromLocalStorage() {
     const userFromLocalStorage = localStorage.getItem('user')
@@ -159,6 +199,12 @@ function getUserFromLocalStorage() {
       user.value = JSON.parse(userFromLocalStorage)
     }
   }
+
+  watch(getUserFromLocalStorage, (newUser) => {
+    if (newUser) {
+      user.value = newUser;
+    }
+  });
 
   function removeFromLocalStorage() {
     localStorage.removeItem('user')
