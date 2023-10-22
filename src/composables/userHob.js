@@ -16,6 +16,7 @@ export const userHob = () => {
     adres: '',
     autor: '',
     city: '',
+    about: '',
     favorites:[],
     image: null,
   })
@@ -119,6 +120,7 @@ const HubListRemake=computed(()=>{
       adres: '',
       autor: '',
       city: '',
+      about: '',
       favorites:[],
       image: null,
     }

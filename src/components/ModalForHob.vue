@@ -21,6 +21,10 @@
                 <Dropdown id="city" v-model="newHub.city" editable :options="kazakhcity" option-label="city" option-value="city" placeholder="Город" />
               </div>
               <div class="p-field">
+                <label for="about">О себе</label>
+                <InputText type="about" v-model="newHub.about" />
+              </div>
+              <div class="p-field">
               <form class="input__wrapper" enctype="multipart/form-data">
               <input id="inputfile" class="input inputfile" name="images" type="file" accept=".jpg, .png" @input="onUpload($event)" />
               <label for="inputfile" class="inputfile-button">
