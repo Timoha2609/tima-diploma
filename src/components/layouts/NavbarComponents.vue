@@ -58,11 +58,6 @@ const items = ref([
       }
     ]
   },
-  {
-    label: 'Выбирай',
-    icon: 'pi pi-android',
-    route: '/list'
-  }
 ])
 </script>
 

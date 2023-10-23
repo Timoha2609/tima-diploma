@@ -65,11 +65,11 @@ function goToUserListl(){
 <template> 
 
   <section class="hob">
-    <Button label="Дизлайк" @click="diz" severity="danger" raised />
+    <Button icon="pi pi-times" @click="diz" severity="danger" rounded outlined aria-label="Cancel" />
     <div class="card-container">
       <UserItem :hub="currentHub" v-if="currentHub" />
     </div>
-    <Button @click="like" label="Лайк" severity="success" raised />
+    <Button @click="like"  icon="pi pi-heart" severity="help" rounded outlined aria-label="Favorite" />
   </section>
 
 
