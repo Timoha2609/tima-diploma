@@ -28,6 +28,7 @@
               <p class="card-paragraph">Hobbie: {{ Hub.hobbie }}</p>
               <p class="card-paragraph">Adres {{ Hub.adres }}</p>
               <p class="card-paragraph">City {{ Hub.city }}</p>
+              <p class="card-paragraph">О нем {{ Hub.about }}</p>
             </template>
           </Card>
         </div>
