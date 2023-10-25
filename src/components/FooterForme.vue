@@ -54,8 +54,7 @@
   <style scoped>  
 
   .page-container {
-    position: relative;
-    overflow: hidden;
+    margin-bottom: 100px; 
   }
   .footer {
     background-color: #333;
