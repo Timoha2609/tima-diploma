@@ -1,4 +1,6 @@
 <template>
+  <div class="page-container">
+  </div>
 
     <footer class="footer">
       <div class="additional-info">
@@ -50,6 +52,11 @@
   </script>
   
   <style scoped>  
+
+  .page-container {
+    position: relative;
+    overflow: hidden;
+  }
   .footer {
     background-color: #333;
     color: red;
@@ -58,10 +65,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     position: fixed;
     bottom: 0;
     width: 100%;
+    height: 100px;
   }
   
   .animation-container {
