@@ -24,10 +24,7 @@ defineProps({
     </template>
     
     <template #content  >    
-    <p class="card-paragraph">Email: {{ hub.autor && hub.autor.email }}</p>
     <p class="card-paragraph">Hobbie: {{ hub.hobbie }}</p>
-    <p class="card-paragraph">Adres {{ hub.adres}}</p>
-    <p class="card-paragraph">City {{ hub.city}}</p>
     </template>
     
 </card>

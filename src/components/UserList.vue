@@ -70,10 +70,8 @@ const onTouchStart = (e) => {
 const onTouchEnd = (e) => {
   touchEndX = e.changedTouches[0].clientX;
   if (touchEndX < touchStartX) {
-
     diz();
   } else if (touchEndX > touchStartX) {
-  
     like();
   }
 };
@@ -81,31 +79,50 @@ const onTouchEnd = (e) => {
 
 </script>
 
-<template> 
-
-  <section class="hob"  @touchstart="onTouchStart" @touchend="onTouchEnd">
-    <Button icon="pi pi-times" @click="diz" severity="danger" rounded outlined aria-label="Cancel" />
+<template>
+  <section class="hob" @touchstart="onTouchStart" @touchend="onTouchEnd">
     <div class="card-container">
       <UserItem :hub="currentHub" v-if="currentHub" />
     </div>
-    <Button @click="like"  icon="pi pi-heart" severity="help" rounded outlined aria-label="Favorite" />
+    <div class="action-buttons">
+      <Button icon="pi pi-times" @click="diz" severity="danger" rounded outlined aria-label="Cancel" class="diz-button" />
+      <Button @click="like" icon="pi pi-heart" severity="help" rounded outlined aria-label="Favorite" class="like-button" />
+    </div>
+    <div class="choose-button">
+      <Button @click="goToUserListl" label="Мой выбор" severity="success" raised />
+    </div>
   </section>
-
-
-  <Button @click="goToUserListl" label="Мой выбор" severity="success" raised />
-
-
 </template>
 
 <style scoped> 
-.hob{
+.diz-button {
+  margin-right: 10px;
+}
+
+.like-button {
+  margin-right: 10px; 
+}
+
+.hob {
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
+  flex-direction: column; 
+  align-items: center;
 }
 
 .card-container {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  margin-bottom: 30px; 
+}
+
+.choose-button {
+  display: flex;
+  justify-content: center;
 }
 </style>
