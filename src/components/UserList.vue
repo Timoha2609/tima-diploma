@@ -60,11 +60,30 @@ function goToUserListl(){
   router.push(`/user`)
 }
 
+let touchStartX = 0;
+let touchEndX = 0;
+
+const onTouchStart = (e) => {
+  touchStartX = e.touches[0].clientX;
+};
+
+const onTouchEnd = (e) => {
+  touchEndX = e.changedTouches[0].clientX;
+  if (touchEndX < touchStartX) {
+
+    diz();
+  } else if (touchEndX > touchStartX) {
+  
+    like();
+  }
+};
+
+
 </script>
 
 <template> 
 
-  <section class="hob">
+  <section class="hob"  @touchstart="onTouchStart" @touchend="onTouchEnd">
     <Button icon="pi pi-times" @click="diz" severity="danger" rounded outlined aria-label="Cancel" />
     <div class="card-container">
       <UserItem :hub="currentHub" v-if="currentHub" />
