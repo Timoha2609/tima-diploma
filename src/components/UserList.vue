@@ -31,13 +31,12 @@ const like = () => {
   setAnimationClass('flip-left');
   if (currentIndex.value < (HubListRemake.value.length - 1)) {
     setTimeout(() => {
-      currentIndex.value++;
+    currentIndex.value++;
     const favoriteid=HubListRemake.value[currentIndex.value-1].id
     console.log(favoriteid)
     if (favoriteid) {
       addToFavorites(favoriteid); 
     }
-
   }, 1500);
   }
   else{
@@ -150,11 +149,11 @@ function setAnimationClass(className) {
 }
 
 .flip-left {
-  animation: flip-left-animation 2s ease-in-out;
+  animation: flip-left-animation 3s ease-in-out;
 }
 
 .flip-right {
-  animation: flip-right-animation 2s ease-in-out;
+  animation: flip-right-animation 3s ease-in-out;
 }
 
 
@@ -165,18 +164,18 @@ function setAnimationClass(className) {
     opacity: 1;
   }
   100% {
-    transform: translateX(200px) translateY(200px) rotateZ(30deg);
+    transform: translateX(300px) translateY(200px) rotateZ(30deg);
     opacity: 1;
   }
 }
 
 @keyframes flip-right-animation {
   0% {
-    transform: translateX(0) translateY(0);;
+    transform: translateX(0) translateY(0);
     opacity: 1;
   }
   100% {
-    transform: translateX(-200px) translateY(200px) rotateZ(-30deg);;
+    transform: translateX(-300px) translateY(200px) rotateZ(-30deg);;
     opacity: 1;
   }
 }

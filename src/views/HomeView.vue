@@ -67,6 +67,7 @@ function goTochose(){
   button {
     padding: 10px 20px;
     font-size: 18px;
+    color:red;
     cursor: pointer;
   }
   
