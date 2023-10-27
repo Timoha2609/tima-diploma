@@ -25,7 +25,7 @@ const userRemake = computed(() => {
 export const useUser = () => {
   const auth = getAuth()
 
-  // войти с помощью окна гугл
+
   function googleRegister() {
     const provider = new GoogleAuthProvider()
 
@@ -33,13 +33,13 @@ export const useUser = () => {
       .then(async (userCredential) => {
         user.value = userCredential.user
 
-        // проверка первый ли раз он зашел
+      
         await addUserToMainDatabase()
 
-        // достаем данные если не первый раз
+      
         await getFromMainDatabase()
 
-        // добавляем в локал сторадж
+       
         addToLocalStorage()
       })
       .catch((error) => {
@@ -86,13 +86,12 @@ export const useUser = () => {
           }
           
           await updateDoc(userDocRef, { favorites: userFavorites });
-          
-          // Обновляем локальное хранилие и пользовательский объект
+        
           user.value.favorites = userFavorites;
           await addToLocalStorage();
         }
       } catch (error) {
-        console.error('Error while adding to favorites:', error);
+        console.error('Проблема в обновление фаворитов', error);
       }
     }
   }
@@ -154,7 +153,7 @@ export const useUser = () => {
   });
 
   async function addToFavorites(favoriteId) {
-    console.log('Adding favoriteId:', favoriteId);
+    console.log('Добалвение фаворита', favoriteId);
     if (userRemake.value && userRemake.value.uid && favoriteId) {
       try {
         console.log(userRemake.value.uid)
@@ -162,24 +161,24 @@ export const useUser = () => {
         console.log(userDocRef);
         const userDocSnapshot = await getDoc(userDocRef);
         console.log(userDocSnapshot.data());
-        console.log('User data from Firestore:', userDocSnapshot.data());
+        console.log('Куда добавлять', userDocSnapshot.data());
         
         if (userDocSnapshot.exists()) {
           const userData = userDocSnapshot.data();  
-          console.log('Current favorites:', userData.favorites);
+          console.log('Текущий favorit', userData.favorites);
           let favorites = userData.favorites || []; 
           if (!favorites.includes(favoriteId)) {
             favorites.push(favoriteId);
-            console.log('Updated favorites:', favorites);
+            console.log('Обновленные фавориты', favorites);
             await updateDoc(userDocRef, { favorites: favorites });
-            console.log('Favorites updated successfully.');
+            console.log('Все прошло успешно');
   
             user.value.favorites = favorites;
             await addToLocalStorage();
           }
         }
       } catch (error) {
-        console.error('Error while adding to favorites:', error);
+        console.error('У тебя ошибка в добавлен фаворитов', error);
       }
     }
   }  
@@ -221,7 +220,7 @@ function getUserFromLocalStorage() {
           await updateDoc(userDocRef, { favorites: userRemake.value.favorites });
           await addToLocalStorage();
         } catch (error) {
-          console.error('Error while removing from favorites:', error);
+          console.error('Проблема в удаление фаворитов', error);
         }
       }
     }

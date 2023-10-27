@@ -24,6 +24,7 @@ const currentHub = computed(() => {
   }
 });
 
+const animationClass = ref('');
 
 
 const like = () => {
@@ -33,21 +34,27 @@ const like = () => {
     console.log(favoriteid)
     if (favoriteid) {
       addToFavorites(favoriteid); 
+      setAnimationClass('flip-left');
     }
 
   }
   else{
     currentIndex.value=0
+    setAnimationClass('flip-left');
   }
+
 };
 
 const diz = () => {
   if (currentIndex.value < (HubListRemake.value.length - 1)) {
     currentIndex.value++;
+    setAnimationClass('flip-right');
   }
   else{
     currentIndex.value=0
+    setAnimationClass('flip-right');  
   }
+
 };
 
 
@@ -76,12 +83,19 @@ const pokazgdeotpusk = (e) => {
   }
 };
 
+function setAnimationClass(className) {
+  animationClass.value = className
+  setTimeout(() => {
+    animationClass.value = '';
+  }, 2000);
+}
+
 
 </script>
 
 <template>
   <section class="hob" @touchstart="pokazgdekos" @touchend="pokazgdeotpusk">
-    <div class="card-container">
+    <div class="card-container" :class="animationClass">
       <UserItem :hub="currentHub" v-if="currentHub" />
     </div>
     <div class="action-buttons">
@@ -125,4 +139,38 @@ const pokazgdeotpusk = (e) => {
   display: flex;
   justify-content: center;
 }
+
+.flip-left {
+  animation: flip-left-animation 1s ease-in-out;
+}
+
+.flip-right {
+  animation: flip-right-animation 1s ease-in-out;
+}
+
+
+
+@keyframes flip-left-animation {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200px) translateY(200px) rotateZ(30deg);
+    opacity: 1;
+  }
+}
+
+@keyframes flip-right-animation {
+  0% {
+    transform: translateX(0) translateY(0);;
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-200px) translateY(200px) rotateZ(-30deg);;
+    opacity: 1;
+  }
+}
+
+
 </style>
