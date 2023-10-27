@@ -28,31 +28,40 @@ const animationClass = ref('');
 
 
 const like = () => {
+  setAnimationClass('flip-left');
   if (currentIndex.value < (HubListRemake.value.length - 1)) {
-    currentIndex.value++;
+    setTimeout(() => {
+      currentIndex.value++;
     const favoriteid=HubListRemake.value[currentIndex.value-1].id
     console.log(favoriteid)
     if (favoriteid) {
       addToFavorites(favoriteid); 
-      setAnimationClass('flip-left');
     }
 
+  }, 1500);
   }
   else{
-    currentIndex.value=0
     setAnimationClass('flip-left');
+    setTimeout(() => {
+      currentIndex.value=0
+  }, 1500);
   }
 
 };
 
 const diz = () => {
   if (currentIndex.value < (HubListRemake.value.length - 1)) {
-    currentIndex.value++;
     setAnimationClass('flip-right');
+    setTimeout(() => {
+      currentIndex.value++;
+  }, 1500);
+
   }
   else{
-    currentIndex.value=0
     setAnimationClass('flip-right');  
+    setTimeout(() => {
+      currentIndex.value=0
+  }, 1500);
   }
 
 };
@@ -87,7 +96,7 @@ function setAnimationClass(className) {
   animationClass.value = className
   setTimeout(() => {
     animationClass.value = '';
-  }, 2000);
+  }, 3000);
 }
 
 
@@ -141,11 +150,11 @@ function setAnimationClass(className) {
 }
 
 .flip-left {
-  animation: flip-left-animation 1s ease-in-out;
+  animation: flip-left-animation 2s ease-in-out;
 }
 
 .flip-right {
-  animation: flip-right-animation 1s ease-in-out;
+  animation: flip-right-animation 2s ease-in-out;
 }
 
 
