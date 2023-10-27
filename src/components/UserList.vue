@@ -37,13 +37,13 @@ const like = () => {
     if (favoriteid) {
       addToFavorites(favoriteid); 
     }
-  }, 1500);
+  }, 2500);
   }
   else{
     setAnimationClass('flip-left');
     setTimeout(() => {
       currentIndex.value=0
-  }, 1500);
+  }, 2500);
   }
 
 };
@@ -53,14 +53,14 @@ const diz = () => {
     setAnimationClass('flip-right');
     setTimeout(() => {
       currentIndex.value++;
-  }, 1500);
+  }, 2500);
 
   }
   else{
     setAnimationClass('flip-right');  
     setTimeout(() => {
       currentIndex.value=0
-  }, 1500);
+  }, 2500);
   }
 
 };
