@@ -60,18 +60,18 @@ function goToUserListl(){
   router.push(`/user`)
 }
 
-let touchStartX = 0;
-let touchEndX = 0;
+let nachpoz = 0;
+let konechpoz = 0;
 
-const onTouchStart = (e) => {
-  touchStartX = e.touches[0].clientX;
+const pokazgdekos = (e) => {
+  nachpoz = e.touches[0].clientX;
 };
 
-const onTouchEnd = (e) => {
-  touchEndX = e.changedTouches[0].clientX;
-  if (touchEndX < touchStartX) {
+const pokazgdeotpusk = (e) => {
+  konechpoz = e.changedTouches[0].clientX;
+  if (konechpoz < nachpoz) {
     diz();
-  } else if (touchEndX > touchStartX) {
+  } else if (konechpoz > nachpoz) {
     like();
   }
 };
@@ -80,7 +80,7 @@ const onTouchEnd = (e) => {
 </script>
 
 <template>
-  <section class="hob" @touchstart="onTouchStart" @touchend="onTouchEnd">
+  <section class="hob" @touchstart="pokazgdekos" @touchend="pokazgdeotpusk">
     <div class="card-container">
       <UserItem :hub="currentHub" v-if="currentHub" />
     </div>

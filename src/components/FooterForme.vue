@@ -8,7 +8,7 @@
         <p>Mail: temirlan.k.it@gmail.com</p>
       </div>
       <div class="animation-container" @click="startAnimation">
-        <span class="animation-text">{{ animationText }}</span>
+        <span class="textforanim">{{ textforanim }}</span>
         <span class="heart">❤️</span>
       </div>
     </footer>
@@ -19,7 +19,7 @@
   export default {
     data() {
       return {
-        animationText: "",
+        textforanim: "",
         isAnimating: false,
       };
     },
@@ -33,15 +33,15 @@
       startAnimation() {
         if (!this.isAnimating) {
           this.isAnimating = true;
-          this.animationText = "We are friends forever";
-          this.animateText(this.animationText, 0);
+          this.textforanim = "We are friends forever";
+          this.textforanimfunc(this.textforanim, 0);
         }
       },
-      animateText(text, index) {
+      textforanimfunc(text, index) {
         if (index < text.length) {
           setTimeout(() => {
-            this.animationText = text.substr(0, index + 1);
-            this.animateText(text, index + 1);
+            this.textforanim = text.substr(0, index + 1);
+            this.textforanimfunc(text, index + 1);
           }, 100);
         } else {
           this.isAnimating = false;
@@ -78,7 +78,7 @@
     justify-content: center;
   }
   
-  .animation-text {
+  .textforanim {
     font-size: 18px;
     display: inline-block;
     overflow: hidden;
