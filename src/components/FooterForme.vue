@@ -25,7 +25,7 @@
     margin-bottom: 100px; 
   }
   .footer {
-    background-color: #333;
+    background-color: #091a32;;
     color: red;
     padding: 20px;
     text-align: center;

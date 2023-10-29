@@ -123,10 +123,12 @@ function setAnimationClass(className) {
 <style scoped> 
 .diz-button {
   margin-right: 10px;
+  margin-bottom: 40px; 
 }
 
 .like-button {
   margin-right: 10px; 
+  margin-bottom: 40px; 
 }
 
 .hob {
@@ -144,9 +146,9 @@ function setAnimationClass(className) {
 
 .action-buttons {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: center;
-  margin-bottom: 30px; 
+  margin-bottom: 5px; 
 }
 
 .choose-button {

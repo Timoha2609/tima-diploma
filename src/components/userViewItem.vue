@@ -36,7 +36,7 @@
   
 </script>
 
-<style>
+<style scoped>
 .all {
   display: flex;
   flex-direction: row;
@@ -53,8 +53,11 @@
 }
 
 .image-container {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
@@ -77,8 +80,4 @@
   margin: 5px 0;
 }
 
-.p-card-header {
-  padding: 35px;
-  background: transparent; 
-}
 </style>

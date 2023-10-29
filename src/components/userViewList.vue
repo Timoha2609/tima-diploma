@@ -2,8 +2,10 @@
   <div>
     <div class="hub-list">
       <section v-for="hub in hubinfavorites" :key='hub'> 
+        <div class="hub-item">
         <userViewItem :hub="hub" @click="goToHubUrl(hub.id)"/>
         <Button label="Удалить" @click="udal(hub.id)" severity="danger" raised />
+      </div>
       </section>
     </div>
   </div>
@@ -59,11 +61,19 @@ function goToHubUrl(id){
 .hub-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px; 
+  gap: 16px;
 }
-.hub-list section {
-  flex: 1; 
-  min-width: 200px; 
+
+.hub-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 200px;
+  margin: 0 auto; 
+  padding: 16px;
 }
+
+
 
 </style>
