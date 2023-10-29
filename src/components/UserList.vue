@@ -37,13 +37,17 @@ const like = () => {
     if (favoriteid) {
       addToFavorites(favoriteid); 
     }
-  }, 2500);
+  }, 2000);
   }
   else{
     setAnimationClass('flip-left');
     setTimeout(() => {
+      const favoriteid = HubListRemake.value[currentIndex.value].id;
+      if (favoriteid) {
+      addToFavorites(favoriteid);
+    }
       currentIndex.value=0
-  }, 2500);
+  }, 2000);
   }
 
 };
@@ -53,14 +57,14 @@ const diz = () => {
     setAnimationClass('flip-right');
     setTimeout(() => {
       currentIndex.value++;
-  }, 2500);
+  }, 2000);
 
   }
   else{
     setAnimationClass('flip-right');  
     setTimeout(() => {
       currentIndex.value=0
-  }, 2500);
+  }, 2000);
   }
 
 };
@@ -95,7 +99,7 @@ function setAnimationClass(className) {
   animationClass.value = className
   setTimeout(() => {
     animationClass.value = '';
-  }, 3000);
+  }, 4000);
 }
 
 
@@ -149,33 +153,33 @@ function setAnimationClass(className) {
 }
 
 .flip-left {
-  animation: flip-left-animation 3s ease-in-out;
+  animation: flip-left-animation 4s ease-in-out;
 }
 
 .flip-right {
-  animation: flip-right-animation 3s ease-in-out;
+  animation: flip-right-animation 4s ease-in-out;
 }
 
 
 
 @keyframes flip-left-animation {
-  0% {
-    transform: translateX(0) translateY(0);
+  0%, 100% {
+    transform: translateX(0) translateY(0) rotateZ(0);
     opacity: 1;
   }
-  100% {
+  50% {
     transform: translateX(300px) translateY(200px) rotateZ(30deg);
     opacity: 1;
   }
 }
 
 @keyframes flip-right-animation {
-  0% {
-    transform: translateX(0) translateY(0);
+  0%, 100% {
+    transform: translateX(0) translateY(0) rotateZ(0);
     opacity: 1;
   }
-  100% {
-    transform: translateX(-300px) translateY(200px) rotateZ(-30deg);;
+  50% {
+    transform: translateX(-300px) translateY(200px) rotateZ(-30deg);
     opacity: 1;
   }
 }

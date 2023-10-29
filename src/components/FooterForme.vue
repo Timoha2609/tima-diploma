@@ -8,7 +8,7 @@
         <p>Mail: temirlan.k.it@gmail.com</p>
       </div>
       <div class="animation-container" @click="startAnimation">
-        <span class="textforanim">{{ textforanim }}</span>
+        <span class="textforanim">We are friends forever</span>
         <span class="heart">❤️</span>
       </div>
     </footer>
@@ -16,39 +16,7 @@
   </template>
   
   <script>
-  export default {
-    data() {
-      return {
-        textforanim: "",
-        isAnimating: false,
-      };
-    },
-    created() {
-      this.startAnimation();
-      setInterval(() => {
-        this.startAnimation();
-      }, 10000);
-    },
-    methods: {
-      startAnimation() {
-        if (!this.isAnimating) {
-          this.isAnimating = true;
-          this.textforanim = "We are friends forever";
-          this.textforanimfunc(this.textforanim, 0);
-        }
-      },
-      textforanimfunc(text, index) {
-        if (index < text.length) {
-          setTimeout(() => {
-            this.textforanim = text.substr(0, index + 1);
-            this.textforanimfunc(text, index + 1);
-          }, 100);
-        } else {
-          this.isAnimating = false;
-        }
-      },
-    },
-  };
+  
   </script>
   
   <style scoped>  
