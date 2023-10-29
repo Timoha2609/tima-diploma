@@ -49,6 +49,7 @@
   flex-direction: row;
   align-items: center;
   margin: 10px;
+  max-height: 300px;
   flex: 1;
 }
 

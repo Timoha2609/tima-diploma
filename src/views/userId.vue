@@ -57,9 +57,16 @@ onMounted(async () => {
 }
 
 .hub-image-container {
-  max-width: 100%;
+  width: 200px; 
+  height: 200px; 
+  margin: 0 auto; 
+  overflow: hidden; 
 }
 
+.hub-image {
+  width: 100%; 
+  height: auto; 
+}
 .hub-image {
   max-width: 100%;
 }
