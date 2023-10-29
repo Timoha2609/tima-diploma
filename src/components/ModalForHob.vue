@@ -121,4 +121,6 @@ const kazakhcity=[
 
 
 
+
+
 </style>    

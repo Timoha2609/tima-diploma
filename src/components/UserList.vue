@@ -106,13 +106,13 @@ function setAnimationClass(className) {
 </script>
 
 <template>
-  <section class="hob" @touchstart="pokazgdekos" @touchend="pokazgdeotpusk">
-    <div class="card-container" :class="animationClass">
+  <section class="hob">
+    <div class="card-container" :class="animationClass"  @touchstart="pokazgdekos" @touchend="pokazgdeotpusk">
       <UserItem :hub="currentHub" v-if="currentHub" />
-    </div>
-    <div class="action-buttons">
-      <Button icon="pi pi-times" @click="diz" severity="danger" rounded outlined aria-label="Cancel" class="diz-button" />
-      <Button @click="like" icon="pi pi-heart" severity="help" rounded outlined aria-label="Favorite" class="like-button" />
+      <div class="action-buttons">
+        <Button icon="pi pi-times" @click="diz" severity="danger" rounded outlined aria-label="Cancel" class="diz-button" />
+        <Button @click="like" icon="pi pi-heart" severity="help" rounded outlined aria-label="Favorite" class="like-button" />
+      </div>
     </div>
     <div class="choose-button">
       <Button @click="goToUserListl" label="Мой выбор" severity="success" raised />
@@ -140,20 +140,23 @@ function setAnimationClass(className) {
 .card-container {
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   height: 70vh;
+  flex-direction: column; 
+  position: relative; 
 }
 
 .action-buttons {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  margin-bottom: 5px; 
+  position: absolute; 
+  bottom: 10px; 
+  left: 0; 
 }
-
 .choose-button {
   display: flex;
   justify-content: center;
+  margin-top: 10px; 
 }
 
 .flip-left {
