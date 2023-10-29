@@ -149,6 +149,8 @@ function setAnimationClass(className) {
 .action-buttons {
   display: flex;
   align-items: center;
+  width: 100%;
+  justify-content: space-between;
   position: absolute; 
   bottom: 10px; 
   left: 0; 
