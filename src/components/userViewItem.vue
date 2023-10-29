@@ -54,7 +54,7 @@
 }
 
 .image-container {
-  width: 100%;
+  width: 210px;
   height: 200px;
   display: flex;
   justify-content: center;
