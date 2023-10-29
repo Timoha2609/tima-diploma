@@ -138,6 +138,8 @@ function setAnimationClass(className) {
 .card-container {
   display: flex;
   justify-content: center;
+  align-items: center; 
+  height: 70vh;
 }
 
 .action-buttons {
