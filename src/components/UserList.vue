@@ -141,7 +141,6 @@ function setAnimationClass(className) {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 85vh;
   flex-direction: column; 
   position: relative; 
 }
