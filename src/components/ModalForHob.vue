@@ -1,5 +1,5 @@
 <template> 
-    <Button label="Расскажи о себе" icon="pi pi-external-link" @click="toogleVisible" true />
+    <Button label="Расскажи о себе" icon="pi pi-external-link" @click="toogleVisible" true class="about-me" />
 
     <Dialog v-model:visible="visible" modal header="Расскажи о себе" :style="{ width: '50vw' }">
         <template #default>
@@ -119,7 +119,13 @@ const kazakhcity=[
   position: absolute;
 }
 
+.about-me {
+  padding: 2px 6px;
+}
 
+.about-me :deep(.p-button-icon) {
+  margin-right: 5px;
+}
 
 
 

@@ -36,6 +36,11 @@ defineProps({
 <style scoped>
 .hub {
   text-align: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
 }
 .image-container {
   width: 100%;
@@ -63,7 +68,6 @@ defineProps({
   font-size: 16px;
   margin: 5px 0;
 }
-
 
 
 </style>

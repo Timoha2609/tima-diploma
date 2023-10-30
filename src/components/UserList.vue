@@ -115,26 +115,28 @@ function setAnimationClass(className) {
       </div>
     </div>
     <div class="choose-button">
-      <Button @click="goToUserListl" label="Мой выбор" severity="success" raised />
+      <Button @click="goToUserListl" label="Мой выбор" severity="success" raised class="choose" />
     </div>
   </section>
 </template>
 
 <style scoped> 
 .diz-button {
-  margin-right: 10px;
-  margin-bottom: 80px; 
+  margin-left: 20px;
+  transform: scale(1.2);
+
 }
 
 .like-button {
-  margin-right: 10px; 
-  margin-bottom: 80px; 
+  margin-right: 20px; 
+  transform: scale(1.2);
 }
 
 .hob {
   display: flex;
   flex-direction: column; 
-  align-items: center;
+  align-items: space-evenly;
+  height: 90vh;
 }
 
 .card-container {
@@ -143,6 +145,8 @@ function setAnimationClass(className) {
   align-items: center;
   flex-direction: column; 
   position: relative; 
+  height: 100%;
+  padding: 10px 8px;
 }
 
 .action-buttons {
@@ -150,9 +154,7 @@ function setAnimationClass(className) {
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  position: relative; 
-  bottom: 70px; 
-  left: 0; 
+  margin: 0 20px;
 }
 .choose-button {
   display: flex;
@@ -192,5 +194,9 @@ function setAnimationClass(className) {
   }
 }
 
+.choose{
+  padding: 7px 25px;
+  font-size: 30px;
+}
 
 </style>
