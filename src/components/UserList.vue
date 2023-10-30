@@ -134,7 +134,7 @@ function setAnimationClass(className) {
   display: flex;
   flex-direction: column; 
   align-items: space-evenly;
-  height: 100%;
+  height: 85vh;
 }
 
 .card-container {
