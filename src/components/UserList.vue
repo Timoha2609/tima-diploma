@@ -37,7 +37,7 @@ const like = () => {
     if (favoriteid) {
       addToFavorites(favoriteid); 
     }
-  }, 2000);
+  }, 200);
   }
   else{
     setAnimationClass('flip-left');
@@ -47,7 +47,7 @@ const like = () => {
       addToFavorites(favoriteid);
     }
       currentIndex.value=0
-  }, 2000);
+  }, 200);
   }
 
 };
@@ -57,14 +57,14 @@ const diz = () => {
     setAnimationClass('flip-right');
     setTimeout(() => {
       currentIndex.value++;
-  }, 2000);
+  }, 200);
 
   }
   else{
     setAnimationClass('flip-right');  
     setTimeout(() => {
       currentIndex.value=0
-  }, 2000);
+  }, 200);
   }
 
 };
@@ -99,7 +99,7 @@ function setAnimationClass(className) {
   animationClass.value = className
   setTimeout(() => {
     animationClass.value = '';
-  }, 4000);
+  }, 1000);
 }
 
 
@@ -123,12 +123,12 @@ function setAnimationClass(className) {
 <style scoped> 
 .diz-button {
   margin-right: 10px;
-  margin-bottom: 40px; 
+  margin-bottom: 80px; 
 }
 
 .like-button {
   margin-right: 10px; 
-  margin-bottom: 40px; 
+  margin-bottom: 80px; 
 }
 
 .hob {
@@ -141,7 +141,7 @@ function setAnimationClass(className) {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 85vh;
   flex-direction: column; 
   position: relative; 
 }
@@ -151,8 +151,8 @@ function setAnimationClass(className) {
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  position: absolute; 
-  bottom: 10px; 
+  position: relative; 
+  bottom: 70px; 
   left: 0; 
 }
 .choose-button {
@@ -162,11 +162,11 @@ function setAnimationClass(className) {
 }
 
 .flip-left {
-  animation: flip-left-animation 4s ease-in-out;
+  animation: flip-left-animation 1s ease-in-out;
 }
 
 .flip-right {
-  animation: flip-right-animation 4s ease-in-out;
+  animation: flip-right-animation 1s ease-in-out;
 }
 
 

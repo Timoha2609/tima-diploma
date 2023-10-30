@@ -17,7 +17,9 @@ defineProps({
   <div class="hub"> 
     <card>
         <template #header> 
-            <img :src="hub.image" alt="hub" class="hub-image" />
+          <div class="image-container">
+            <img :src="hub.image" alt="hub" class="hub-image" />  
+          </div>
         </template>
     <template #title> 
       <h3 class="card-title">{{ hub.name }}</h3>
@@ -35,12 +37,20 @@ defineProps({
 .hub {
   text-align: center; 
 }
+.image-container {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
 .hub-image {
-  width: 100%; 
-  height: 500px;
-  margin: 0 auto;
-  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  object-position: center center; 
 }
 
 .card-title {
