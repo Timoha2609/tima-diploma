@@ -21,7 +21,7 @@
   </div>
   </template>
   
-  <script setup>
+<script setup>
   import Card from 'primevue/card';
   import { defineProps} from "vue";
 

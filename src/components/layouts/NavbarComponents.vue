@@ -64,8 +64,14 @@ const items = ref([
 <style scoped>
 :deep(.p-menubar) {
  justify-content: space-between !important;
- margin: 0 1.5rem;
+ margin: 0 0.5rem;
+
+ 
+ 
 }
+
+
+
 </style>
 
 
