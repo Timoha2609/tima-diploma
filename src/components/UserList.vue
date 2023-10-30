@@ -107,28 +107,18 @@ function setAnimationClass(className) {
 
 <template>
   <section class="hob">
-    <div class="hob-container">
     <div class="card-container" :class="animationClass"  @touchstart="pokazgdekos" @touchend="pokazgdeotpusk">
       <UserItem :hub="currentHub" v-if="currentHub" />
       <div class="action-buttons">
         <Button icon="pi pi-times" @click="diz" severity="danger" rounded outlined aria-label="Cancel" class="diz-button" />
         <Button @click="goToUserListl" label="Мой выбор" severity="success" raised class="choose" />
-        <Button @click="like" icon="pi pi-heart" severity="help" rounded outlined aria-label="Favorite" class="like-button" />
-        
+        <Button @click="like" icon="pi pi-heart" severity="help" rounded outlined aria-label="Favorite" class="like-button" />     
       </div>
     </div>
-  </div>
   </section>
 </template>
 
 <style scoped> 
-.hob-container {
-  overflow: hidden;
-  height: auto; 
-  display: flex;
-  flex-direction: column;
-  align-items: space-evenly;
-}
 .diz-button {
   margin-left: 20px;
   transform: scale(1.2);
@@ -144,7 +134,7 @@ function setAnimationClass(className) {
   display: flex;
   flex-direction: column; 
   align-items: space-evenly;
-  height: 90vh;
+  height: 100%;
 }
 
 .card-container {
@@ -153,7 +143,7 @@ function setAnimationClass(className) {
   align-items: center;
   flex-direction: column; 
   position: relative; 
-  height: 100%;
+  height: 80vh;
   padding: 10px 8px;
 }
 
@@ -200,6 +190,7 @@ function setAnimationClass(className) {
 .choose{
   padding: 7px 25px;
   font-size: 15px;
+  
 }
 
 </style>
