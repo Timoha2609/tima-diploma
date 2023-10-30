@@ -132,9 +132,8 @@ function setAnimationClass(className) {
 
 .hob {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: space-evenly;
-  height: 85vh;
 }
 
 .card-container {
@@ -143,7 +142,7 @@ function setAnimationClass(className) {
   align-items: center;
   flex-direction: column; 
   position: relative; 
-  height: 80vh;
+  flex-grow: 1;
   padding: 10px 8px;
 }
 
