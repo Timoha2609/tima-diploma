@@ -112,11 +112,10 @@ function setAnimationClass(className) {
       <UserItem :hub="currentHub" v-if="currentHub" />
       <div class="action-buttons">
         <Button icon="pi pi-times" @click="diz" severity="danger" rounded outlined aria-label="Cancel" class="diz-button" />
+        <Button @click="goToUserListl" label="Мой выбор" severity="success" raised class="choose" />
         <Button @click="like" icon="pi pi-heart" severity="help" rounded outlined aria-label="Favorite" class="like-button" />
+        
       </div>
-    </div>
-    <div class="choose-button">
-      <Button @click="goToUserListl" label="Мой выбор" severity="success" raised class="choose" />
     </div>
   </div>
   </section>
@@ -165,11 +164,6 @@ function setAnimationClass(className) {
   justify-content: space-between;
   margin: 0 20px;
 }
-.choose-button {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px; 
-}
 
 .flip-left {
   animation: flip-left-animation 1s ease-in-out;
@@ -205,7 +199,7 @@ function setAnimationClass(className) {
 
 .choose{
   padding: 7px 25px;
-  font-size: 30px;
+  font-size: 15px;
 }
 
 </style>
