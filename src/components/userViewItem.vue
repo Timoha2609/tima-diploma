@@ -49,13 +49,14 @@
   flex-direction: row;
   align-items: center;
   margin: 10px;
-  max-height: 300px;
   flex: 1;
+  height: 100%;
+  width:100%;
 }
 
 .image-container {
-  width: 210px;
-  height: 200px;
+  width: 100%;
+  max-height: 300px; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,9 +64,8 @@
 }
 
 .hub-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 400px;
+  height: 400px;
   margin: 0;
   padding: 0;
   border: none;
@@ -80,5 +80,4 @@
   font-size: 14px;
   margin: 5px 0;
 }
-
 </style>

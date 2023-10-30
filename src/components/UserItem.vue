@@ -59,14 +59,14 @@ defineProps({
 }
 
 .card-title {
-  font-size: 24px; 
-  font-weight: bold; 
-  margin: 20px 0; 
+  font-size: 32px; 
+  font-weight: bold;
+  margin: 20px 0;
   
 }
 .card-paragraph {
-  font-size: 16px;
-  margin: 5px 0;
+  font-size: 20px; 
+  margin: 10px 0; 
 }
 
 

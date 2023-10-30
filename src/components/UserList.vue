@@ -107,6 +107,7 @@ function setAnimationClass(className) {
 
 <template>
   <section class="hob">
+    <div class="hob-container">
     <div class="card-container" :class="animationClass"  @touchstart="pokazgdekos" @touchend="pokazgdeotpusk">
       <UserItem :hub="currentHub" v-if="currentHub" />
       <div class="action-buttons">
@@ -117,10 +118,18 @@ function setAnimationClass(className) {
     <div class="choose-button">
       <Button @click="goToUserListl" label="Мой выбор" severity="success" raised class="choose" />
     </div>
+  </div>
   </section>
 </template>
 
 <style scoped> 
+.hob-container {
+  overflow: hidden;
+  height: auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: space-evenly;
+}
 .diz-button {
   margin-left: 20px;
   transform: scale(1.2);

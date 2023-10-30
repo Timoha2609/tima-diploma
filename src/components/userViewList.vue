@@ -4,7 +4,9 @@
       <section v-for="hub in hubinfavorites" :key='hub'> 
         <div class="hub-item">
         <userViewItem :hub="hub" @click="goToHubUrl(hub.id)"/>
-        <Button @click="udal(hub.id)" icon="pi pi-trash" severity="help" rounded outlined aria-label="Favorite" class="like-button" />
+        <div class="button-container">
+        <Button @click="udal(hub.id)" icon="pi pi-trash" severity="help" rounded outlined aria-label="Favorite" class="delete-but" />
+      </div>
       </div>
       </section>
     </div>
@@ -71,8 +73,15 @@ function goToHubUrl(id){
   align-items: center;
   text-align: center;
   min-width: 200px;
-  margin: 0 auto; 
+  margin: 0 auto;
   padding: 16px;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
 }
 
 

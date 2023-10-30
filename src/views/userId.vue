@@ -6,11 +6,11 @@
       </div>
       <div class="hub-description">
         <h3 class="card-title">{{ Hub.name }}</h3>
-        <p class="card-paragraph">Email: {{ Hub.autor && Hub.autor.email }}</p>
-        <p class="card-paragraph">Hobbie: {{ Hub.hobbie }}</p>
-        <p class="card-paragraph">Adres {{ Hub.adres }}</p>
-        <p class="card-paragraph">City {{ Hub.city }}</p>
-        <p class="card-paragraph">О нем {{ Hub.about }}</p>
+        <p class="card-paragraph">Email:  {{ Hub.autor && Hub.autor.email.replace('@gmail.com', '') }}</p>
+        <p class="card-paragraph">Мое хобби: {{ Hub.hobbie }}</p>
+        <p class="card-paragraph">Мой адрес: {{ Hub.adres }}</p>
+        <p class="card-paragraph">Мой город: {{ Hub.city }}</p>
+        <p class="card-paragraph">Обо мне: {{ Hub.about }}</p>
       </div>
     </div>
   </div>
@@ -29,6 +29,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+
 .center-container {
   display: flex;
   justify-content: center;
@@ -57,22 +58,22 @@ onMounted(async () => {
 }
 
 .hub-image-container {
-  width: 200px; 
-  height: 200px; 
-  margin: 0 auto; 
-  overflow: hidden; 
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .hub-image {
-  width: 100%; 
-  height: auto; 
-}
-.hub-image {
+  width: 100%;
+  height: auto;
   max-width: 100%;
 }
 
 .hub-description {
   padding: 16px;
+  text-align: center;
+  font-size: 18px;
 }
 
 .card-title {
