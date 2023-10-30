@@ -3,10 +3,6 @@
   </div>
 
     <footer class="footer">
-      <div class="additional-info">
-        <p>Сайт создал Karipzhanov T</p>
-        <p>Mail: temirlan.k.it@gmail.com</p>
-      </div>
       <div class="animation-container" @click="startAnimation">
         <span class="textforanim">We are friends forever</span>
         <span class="heart">❤️</span>
