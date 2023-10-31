@@ -10,10 +10,11 @@ import { useUser } from '@/composables/useUser';
 const router=useRouter();
 
 
-const { HubListRemake, getHubList } = userHob();
+const { HubListRemake, getHubList,loading } = userHob();
 const currentIndex = ref(0);
 
 const { addToFavorites} = useUser() 
+
 
 
 const currentHub = computed(() => {
@@ -71,8 +72,13 @@ const diz = () => {
 
 
 onMounted(async () => {
-  await getHubList();
-
+  try {
+    await getHubList();
+    loading.value = false; 
+  } catch (error) {
+    console.error('Ошибка загрузки:', error);
+    loading.value = false; 
+  }
 });
 
 function goToUserListl(){
@@ -107,7 +113,10 @@ function setAnimationClass(className) {
 
 <template>
   <section class="hob">
-    <div class="card-container" :class="animationClass"  @touchstart="pokazgdekos" @touchend="pokazgdeotpusk">
+    <div v-if="loading" class="loading-indicator">
+      Loading...
+    </div>
+    <div v-else class="card-container" :class="animationClass"  @touchstart="pokazgdekos" @touchend="pokazgdeotpusk">
       <UserItem :hub="currentHub" v-if="currentHub" />
       <div class="action-buttons">
         <Button icon="pi pi-times" @click="diz" severity="danger" rounded outlined aria-label="Cancel" class="diz-button" />
