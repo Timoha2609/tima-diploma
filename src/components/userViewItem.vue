@@ -11,10 +11,10 @@
           <h3 class="card-title">{{ hub.name }}</h3>
         </template>
         <template #content>
-          <p class="card-paragraph">Email: {{ hub.autor && hub.autor.email }}</p>
-          <p class="card-paragraph">Hobbie: {{ hub.hobbie }}</p>
-          <p class="card-paragraph">Adres {{ hub.adres }}</p>
-          <p class="card-paragraph">City {{ hub.city }}</p>
+          <p class="card-paragraph">Email: {{ hub.autor && hub.autor.email.replace('@gmail.com', '') }}</p>
+          <p class="card-paragraph">Мое хобби: {{ hub.hobbie }}</p>
+          <p class="card-paragraph">Адрес: {{ hub.adres }}</p>
+          <p class="card-paragraph">Город: {{ hub.city }}</p>
         </template>
       </Card>
     </div>
