@@ -130,13 +130,13 @@ function setAnimationClass(className) {
 <style scoped> 
 .diz-button {
   margin-left: 20px;
-  transform: scale(1.2);
+  transform: scale(0.9);
 
 }
 
 .like-button {
   margin-right: 20px; 
-  transform: scale(1.2);
+  transform: scale(0.9);
 }
 
 .hob {
