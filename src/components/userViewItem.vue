@@ -64,8 +64,8 @@
 }
 
 .hub-image {
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  height: 350px;
   margin: 0;
   padding: 0;
   border: none;

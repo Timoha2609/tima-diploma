@@ -44,6 +44,8 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   text-align: center;
+  font-style: italic;
+  font-family: sans-serif;
 }
 
 @keyframes slideIn {
