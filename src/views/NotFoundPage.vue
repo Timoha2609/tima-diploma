@@ -1,14 +1,10 @@
 <template>
+    Страница не найдена
+  </template>
+  
+  <script setup>
+  </script>
+  
+  <style scoped>
 
-Страница не найдена
-    
-</template>
-      
-<script setup>
-
-    
-</script>
-    
-<style scoped>
-    
-</style>
+  </style>
