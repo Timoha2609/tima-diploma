@@ -51,7 +51,7 @@ const items = ref([
       },
       {
         label: 'Выйти',
-        icon: 'pi-sign-out',
+        icon: 'pi pi-sign-out',
         command: () => {
           googleLogout()
         }
@@ -75,11 +75,3 @@ const items = ref([
 </style>
 
 
-<!-- Когда ты лайкаешь -->
-<!-- stateLikes -->
-<!-- добавляешь айди того кого он лайнкул в user.favourires -->
-<!-- put запрос чтобы он перезаписал в юзере поле favourites -->
-<!-- страница любимых -->
-<!-- гетЮзер -->
-<!-- гетМаяФаворитс и favouritesList -->
-<!-- рисуешь на странице -->
