@@ -31,7 +31,7 @@
               <span class="input__file-icon-wrapper">
               <img class="input__file-icon" src="@/assets/uploadImage.png" alt="Выбрать файл" width="25" />
               </span>
-              <span class="input__file-button-text"> Загрузи картинку машины</span>
+              <span class="input__file-button-text"> Загрузи картинку</span>
             </label>
               </form>
                 </div>
